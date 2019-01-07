@@ -2,6 +2,7 @@
 title: C语言知识总结 
 tags: C,编程,嵌入式
 grammar_cjkRuby: true
+grammar_tableExtra: true
 ---
 [toc]
 
@@ -24,3 +25,5 @@ puts(str)也是字符串输出函数，在写完字符串后，puts函数会额�
 * scanf("%s", str)会在开始跳过空白字符，遇到非空白字符开始读取，直到遇到空字符结束，最后会存储空字符到结尾。
 * gets(str)函数不会在开始跳过空白字符
 * gets(str)函数会持续读入直到遇到换行符，存入时，会把结尾的换行符替换成空字符。
+* scanf("%*n*s", str) 会比较安全，指定读入的字符数，不然gets和scanf都无法检测数组何时被填满。gets函数天生就不安全，可以使用fgets函数替代
+

@@ -27,3 +27,6 @@ puts(str)也是字符串输出函数，在写完字符串后，puts函数会额�
 * gets(str)函数会持续读入直到遇到换行符，存入时，会把结尾的换行符替换成空字符。
 * scanf("%*n*s", str) 会比较安全，指定读入的字符数，不然gets和scanf都无法检测数组何时被填满。gets函数天生就不安全，可以使用fgets函数替代
 
+### 定义指向函数的指针
+typedef void (*MTR_RecvCallbackType)(uint8_t *data, uint16_t len,APL_DataProtoType data_type);
+

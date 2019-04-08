@@ -102,3 +102,9 @@ git 还提供了另一种 exclude 的方式来做同样的事情，不同的是 
 	git config --global color.ui true
 ## 终端显示中文文件名
 	git config --global core.quotepath false
+
+## 更换git的比较工具
+	[diff]
+			tool = WinMerge
+	[difftool "WinMerge"]
+			cmd = "\"C:/Program Files/WinMerge/WinMergeU.exe\" \"$LOCAL\" \"$REMOTE\""

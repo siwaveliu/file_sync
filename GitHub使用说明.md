@@ -113,4 +113,24 @@ git 还提供了另一种 exclude 的方式来做同样的事情，不同的是 
 	[difftool "WinMerge"]
 			cmd = "\"C:/Program Files/WinMerge/WinMergeU.exe\" \"$LOCAL\" \"$REMOTE\""
 			
+## 更改git的远程访问方式
+	git remote -v # 查看远程访问方式
+	git remote set-url origin XXX # XXX是ssh或者https链接，在github上的![enter description here](./images/git链接.png)
+## 设置代理访问
+	配置ssh的socks5代理实现git的代理。在ssh的配置文件~/.ssh/config（没有则新建）使用ProxyCommand配置
 	
+	
+
+> 
+#windows
+	  Host bitbucket.org
+	  User git
+	  Port 22
+	  Hostname bitbucket.org
+	  ProxyCommand connect -S 127.0.0.1:1080 %h %p
+#Linux
+	  Host bitbucket.org
+	  User git
+	  Port 22
+	  Hostname bitbucket.org
+	  ProxyCommand nc -x 127.0.0.1:1080 %h %p

@@ -117,20 +117,54 @@ git 还提供了另一种 exclude 的方式来做同样的事情，不同的是 
 	git remote -v # 查看远程访问方式
 	git remote set-url origin XXX # XXX是ssh或者https链接，在github上的![enter description here](./images/git链接.png)
 ## 设置代理访问
-	配置ssh的socks5代理实现git的代理。在ssh的配置文件~/.ssh/config（没有则新建）使用ProxyCommand配置
-	
-	
+前提：socks5代理服务器，默认端口1080
+设置SSH协议的代理
 
-> 
-#windows
-	  Host bitbucket.org
-	  User git
-	  Port 22
-	  Hostname bitbucket.org
-	  ProxyCommand connect -S 127.0.0.1:1080 %h %p
+如果你的远程仓库拥有如下的格式：
+
+git@github.com:archerie/learngit.git
+ssh://git@github.com:archerie/learngit.git
+
+那么，你使用的是SSH协议连接的远程仓库。因为git依赖ssh去连接，所以，我们需要配置ssh的socks5代理实现git的代理。在ssh的配置文件~/.ssh/config（没有则新建）使用ProxyCommand配置：
+
 #Linux
-	  Host bitbucket.org
-	  User git
-	  Port 22
-	  Hostname bitbucket.org
-	  ProxyCommand nc -x 127.0.0.1:1080 %h %p
+Host bitbucket.org
+  User git
+  Port 22
+  Hostname bitbucket.org
+  ProxyCommand nc -x 127.0.0.1:1080 %h %p
+
+#windows
+Host bitbucket.org
+  User git
+  Port 22
+  Hostname bitbucket.org
+  ProxyCommand connect -S 127.0.0.1:1080 %h %p
+
+如果你使用github，那么你只需要把bitbucket.org换成github.com就行了。具体配置的含义请参考ssh_config(5)。
+设置http/https协议代理
+
+如果你的远程仓库链接拥有如下格式：
+
+http://github.com/archerie/learngit.git
+https://github.com/archerie/learngit.git
+
+说明你使用的是http/https协议，所以可以使用git配套的CMSSW支持的代理协议：SOCKS4、SOCKS5和HTTPS/HTTPS。可通过配置http.proxy配置：
+
+### 全局设置
+git config --global[local] http.proxy socks5://localhost:1080
+
+### 本次设置
+git clone https://github.com/example/example.git --config "http.proxy=127.0.0.1:1080"
+
+这里演示的是socks5的配置，需要其他配置的可参考git-config配置中的http.proxy。
+设置Git协议的代理
+
+Git协议是Git提供的一个守护进程，它监听专门的端口（9418），然后提供类似于ssh协议一样的服务，只是它不需要验证。所以，然后用户通过网络都可以使用git协议连接提供git连接的仓库。如果远程仓库的链接是如下形式：
+
+git://github.com/archerie/learngit.git
+
+那么，该仓库使用git协议连接。所以，需要使用CMSSW提供的简单脚本去通过socks5代理访问：git-proxy。配置如下：
+
+git config --global core.gitproxy "git-proxy"
+git config --global socks.proxy "localhost:1080"

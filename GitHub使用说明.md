@@ -128,17 +128,17 @@ ssh://git@github.com:archerie/learngit.git
 那么，你使用的是SSH协议连接的远程仓库。因为git依赖ssh去连接，所以，我们需要配置ssh的socks5代理实现git的代理。在ssh的配置文件~/.ssh/config（没有则新建）使用ProxyCommand配置：
 
 #Linux
-Host bitbucket.org
+Host github.com
   User git
   Port 22
-  Hostname bitbucket.org
+  Hostname github.com
   ProxyCommand nc -x 127.0.0.1:1080 %h %p
 
 #windows
-Host bitbucket.org
+Host github.com
   User git
   Port 22
-  Hostname bitbucket.org
+  Hostname github.com
   ProxyCommand connect -S 127.0.0.1:1080 %h %p
 
 如果你使用github，那么你只需要把bitbucket.org换成github.com就行了。具体配置的含义请参考ssh_config(5)。

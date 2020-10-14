@@ -9,7 +9,6 @@ grammar_decorate: true
 grammar_mathjax: true
 ---
 
-[toc!?direction=lr]
 ####
 堆和栈在内存中的区别是什么(数据结构方面以及内存方面)堆和树的区别；
 ####

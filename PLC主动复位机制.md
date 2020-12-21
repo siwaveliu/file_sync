@@ -15,7 +15,7 @@ grammar_cjkRuby: true
 ### NML层
 一个小时未收到bcn，芯片复位
 ### MAC层
-5分钟未收到任何fc_crc正确的报文，复位phy。
+30分钟未收到任何fc_crc正确的报文，复位phy。
 
 ## STA
 ### APP层
@@ -25,4 +25,4 @@ grammar_cjkRuby: true
 ### NML层
 一个小时未收到bcn，芯片复位。
 ### MAC层
-5分钟未收到任何fc_crc正确的报文，复位phy。
+30分钟未收到任何fc_crc正确的报文，复位phy。
